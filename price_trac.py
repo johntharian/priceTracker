@@ -19,7 +19,8 @@ class DataBase():
         _id = self.collection.insert_one(post).inserted_id
         print(_id)
 
-def price_trace():
+
+def price_trace(save_data=True):
 
     try:
         url='https://www.google.com/finance/quote/USD-INR'
@@ -45,16 +46,16 @@ def price_trace():
                 'day':day,
                 'time':t
                 }
-            
-            db=DataBase()
 
-            db.insert_into_db(post)
-            # collection.insert_one(post)
+            if save_data:
+                db=DataBase()
+                db.insert_into_db(post)
+
+            return {'price':p,'day':day,'time':t}
+
 
     except Exception as e: 
         print(e)
         
 
-            
 
-price_trace()
