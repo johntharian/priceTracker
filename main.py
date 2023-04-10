@@ -2,22 +2,23 @@ from fastapi import FastAPI
 
 from price_trac import price_trace
 
-app=FastAPI()
+app = FastAPI()
 
 @app.get('/')
 async def root():
     return {"Status":"OK"}
 
-@app.get('/getprice')
-async def getprice():
-    return price_trace(save_data=True)
+@app.get('/getprice/{item}')
+def getprice(item):
+    data= price_trace(item,save_data=True)
+    return data
 
-@app.get('/admin-getprice')
-async def admingetprice():
-    return price_trace(save_data=False)
+@app.get('/admin-getprice/{item}')
+def admingetprice(item):
+    return price_trace(item,save_data=False)
 
 @app.get('/getFullData')
-async def getFullData():
+def getFullData():
     return {}
 
 
