@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 
 from price_trac import price_trace
+from reset_db import reset_db
 
 app = FastAPI()
 
@@ -17,8 +18,12 @@ def getprice(item):
 def admingetprice(item):
     return price_trace(item,save_data=False)
 
+@app.get('/remove-data')
+def removedata():
+    return reset_db()
+
 @app.get('/getFullData')
 def getFullData():
     return {}
 
-
+    

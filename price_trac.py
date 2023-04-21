@@ -25,7 +25,7 @@ def price_trace(item,save_data=True):
 
         if response.status_code==200:
             soup=BeautifulSoup(response.content,'html.parser')
-
+            # print(soup) 
             for data in soup.findAll("div",attrs={"class","YMlKec fxKbKc"}):
                 print(data.text)
                 p=data.text
@@ -36,7 +36,7 @@ def price_trace(item,save_data=True):
                 day=d.split(',')[0]
                     
                 t=d.split(',')[1]  
-                print(day,t)
+                # print(day,t)
 
             p=float(p.replace('$','').replace(',',''))
 
@@ -44,7 +44,7 @@ def price_trace(item,save_data=True):
                 'day':day,
                 'time':t
                 }
-
+            print(post)
             if save_data:
                 if item=='USD-INR':
                     insert_into_db(usd_collection,post)
